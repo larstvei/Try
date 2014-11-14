@@ -1,5 +1,4 @@
-;;; -*- lexical-binding: t -*-
-;;; try.el --- Try out Emacs packages.
+;;; try.el --- Try out Emacs packages. -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2014 Lars Tveito.
 
@@ -18,7 +17,7 @@
 ;; details.
 ;;
 ;; You should have received a copy of the GNU General Public License along
-;; with Try.  If not, see <http://www.gnu.org/licenses/>.
+;; with Try. If not, see <http://www.gnu.org/licenses/>.
 
 (require 'package)
 (require 'url)

@@ -1,11 +1,12 @@
-#Try
+# Try
 
-This is a package that allow you to try out other Emacs packages, without
-installing them. If you install a package (using `package-install`) you have
-to remember to delete this, if you realize you don't need that package. A
-common way around this is to copy the code into the `*scratch*`-buffer and
-evaluate the buffer. This extension essentially automates this process, by
-excepting a URL to a plain-text `.el`-file, downloading the content and
-evaluate it.
+Try is a packages that allow you to try out Emacs packages without
+installing them. If you pass a URL to a plain-text `.el`-file it evaluates
+the content, without storing the file.
 
-Unfortunately, you won't be able to try Try with `M-x try`.
+Remember to make packages from your `package-archives` available for
+download with `M-x package-refresh-contents`.
+
+Packages from ELPA will temporarily be stored in `/tmp/` by default.
+
+Unfortunately, you won't be able to try Try with `M-x try RET try`.
