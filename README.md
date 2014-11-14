@@ -1,4 +1,4 @@
-#try.el
+#Try
 
 This is a package that allow you to try out other Emacs packages, without
 installing them. If you install a package (using `package-install`) you have
@@ -8,4 +8,4 @@ evaluate the buffer. This extension essentially automates this process, by
 excepting a URL to a plain-text `.el`-file, downloading the content and
 evaluate it.
 
-Too bad you won't be able to try out `try.el` with `try.el`.
+Unfortunately, you won't be able to try Try with `M-x try`.
