@@ -3,6 +3,8 @@
 ;; Copyright (C) 2014 Lars Tveito.
 
 ;; Author: Lars Tveito <larstvei@ifi.uio.no>
+;; Created: 13th November 2014
+;; URL: http://github.com/larstvei/try
 
 ;; Contains code from GNU Emacs <https://www.gnu.org/software/emacs/>,
 ;; released under the GNU General Public License version 3 or later.
@@ -19,6 +21,7 @@
 ;; You should have received a copy of the GNU General Public License along
 ;; with Try. If not, see <http://www.gnu.org/licenses/>.
 
+;;; Code:
 (require 'package)
 (require 'url)
 
@@ -42,6 +45,7 @@
   "Compose two functions."
   (lambda (&rest x) (funcall f (apply g x))))
 
+;;;###autoload
 (defun try ()
   "Try out a package from your `package-archives' or pass a URL
 to a raw .el file. Packages are stored in `try-tmp-dir' and raw
@@ -61,3 +65,5 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
                               "Try running `package-refresh-contents'!"))))))
 
 (provide 'try)
+
+;;; try.el ends here.
