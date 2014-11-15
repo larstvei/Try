@@ -7,6 +7,7 @@
 ;; Created: 13th November 2014
 ;; Keywords: packages
 ;; Version: 0.0.1
+;; Package-Requires: ((emacs "24"))
 
 ;; Contains code from GNU Emacs <https://www.gnu.org/software/emacs/>,
 ;; released under the GNU General Public License version 3 or later.
