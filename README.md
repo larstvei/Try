@@ -6,6 +6,17 @@ the content, without storing the file.
 
 Packages from ELPA will temporarily be stored in `/tmp/` by default.
 
+## Installation
+
+You can install Try using elpa.
+
+It's available on [marmalade](http://marmalade-repo.org/) and
+[melpa](http://melpa.milkbox.net/):
+
+```
+M-x package-install try
+```
+
 ## Usage
 
 Remember to make packages from your `package-archives` available for
@@ -13,6 +24,20 @@ download with
 
 ```
 M-x package-refresh-contents
+```
+
+if you haven't already.
+
+Then to try out a package you can run
+
+```
+M-x try RET some-package
+```
+
+Or if you want to try out some package from the web, just paste in the URL
+
+```
+M-x try RET https://url.com/to/some/file.el
 ```
 
 ### Example
