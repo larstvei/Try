@@ -41,32 +41,17 @@
 ;; It's available on [marmalade](http://marmalade-repo.org/) and
 ;; [melpa](http://melpa.milkbox.net/):
 
-;; ```
 ;; M-x package-install try
-;; ```
 
 ;; ## Usage
 
-;; Remember to make packages from your `package-archives` available for
-;; download with
+;; To try out a package you can run
 
-;; ```
-;; M-x package-refresh-contents
-;; ```
-
-;; if you haven't already.
-
-;; Then to try out a package you can run
-
-;; ```
 ;; M-x try RET some-package
-;; ```
 
 ;; Or if you want to try out some package from the web, just paste in the URL
 
-;; ```
 ;; M-x try RET https://url.com/to/some/file.el
-;; ```
 
 ;; ### Example
 
@@ -75,18 +60,14 @@
 ;; [multiple cursors](https://github.com/magnars/multiple-cursors.el) by
 ;; running:
 
-;; ```
 ;; M-x try RET multiple-cursors RET
-;; ```
 
 ;; If you on the other hand want to test out a single `.el`-file from somewhere
 ;; you can simply insert an URL. Trying out
 ;; [Leuven-theme](https://github.com/fniessen/emacs-leuven-theme) can be done
 ;; by running:
 
-;; ```
 ;; M-x try RET https://raw.githubusercontent.com/fniessen/emacs-leuven-theme/master/leuven-theme.el RET
-;; ```
 
 ;; Unfortunately, you won't be able to try Try with `M-x try RET try`.
 
@@ -94,7 +75,12 @@
 (require 'package)
 (require 'url)
 
-(defvar try-tmp-dir "/tmp/")
+(defvar try-archive-contents-initial-value package-archive-contents
+  "Remember the initial value of `package-archive-contents' to be
+  able to detect the need to call `package-refresh-contents'.")
+
+(defvar try-tmp-dir "/tmp/"
+  "The default place packages to try out is /tmp/.")
 
 (defun try-raw-link-p (url)
   "Returns non-nil if this looks like an URL to a .el file."
@@ -110,6 +96,10 @@
       ((debug error)
        (message "Could not parse %s" url) nil))))
 
+(defun try-package-exists-p (package-name)
+  "Returns non-nil if the package is available for download."
+  (assq package-name package-archive-contents))
+
 (defun try-compose (f g)
   "Compose two functions."
   (lambda (&rest x) (funcall f (apply g x))))
@@ -120,15 +110,22 @@
 to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
   (interactive)
-  (let ((url-or-package (completing-read
-                         "url or package: "
-                         (mapcar (try-compose 'symbol-name 'car)
-                                 package-archive-contents))))
+  ;; Refresh package contents if needed.
+  (and (eq try-archive-contents-initial-value
+           package-archive-contents)
+       (< 1 (length package-archives))
+       (package-refresh-contents))
+  ;; Completions for packages.
+  (let* ((url-or-package (completing-read
+                          "url or package: "
+                          (mapcar (try-compose 'symbol-name 'car)
+                                  package-archive-contents)))
+         (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
-          ((assq (intern url-or-package) package-archive-contents)
+          ((try-package-exists-p package-symbol)
            (let ((package-user-dir try-tmp-dir)
                  (package-alist nil))
-             (package-install (intern url-or-package))
+             (package-install package-symbol)
              (message "Trying %s!" url-or-package)))
           (t (message (concat "Couldn't find a sensible way to try this. "
                               "Try running `package-refresh-contents'!"))))))

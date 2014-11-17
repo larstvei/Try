@@ -13,32 +13,17 @@ You can install Try using elpa.
 It's available on [marmalade](http://marmalade-repo.org/) and
 [melpa](http://melpa.milkbox.net/):
 
-```
-M-x package-install try
-```
+<kbd> M-x package-install try </kbd>
 
 ## Usage
 
-Remember to make packages from your `package-archives` available for
-download with
+To try out a package you can run
 
-```
-M-x package-refresh-contents
-```
-
-if you haven't already.
-
-Then to try out a package you can run
-
-```
-M-x try RET some-package
-```
+<kbd> M-x try RET some-package </kbd>
 
 Or if you want to try out some package from the web, just paste in the URL
 
-```
-M-x try RET https://url.com/to/some/file.el
-```
+<kbd> M-x try RET https://url.com/to/some/file.el </kbd>
 
 ### Example
 
@@ -47,17 +32,13 @@ If you for instance have [melpa](http://melpa.org/) in your
 [multiple cursors](https://github.com/magnars/multiple-cursors.el) by
 running:
 
-```
-M-x try RET multiple-cursors RET
-```
+<kbd> M-x try RET multiple-cursors RET </kbd>
 
 If you on the other hand want to test out a single `.el`-file from somewhere
 you can simply insert an URL. Trying out
 [Leuven-theme](https://github.com/fniessen/emacs-leuven-theme) can be done
 by running:
 
-```
-M-x try RET https://raw.githubusercontent.com/fniessen/emacs-leuven-theme/master/leuven-theme.el RET
-```
+<kbd> M-x try RET https://raw.githubusercontent.com/fniessen/emacs-leuven-theme/master/leuven-theme.el RET </kbd>
 
 Unfortunately, you won't be able to try Try with `M-x try RET try`.
