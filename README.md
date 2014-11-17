@@ -41,4 +41,4 @@ by running:
 
 <kbd> M-x try RET https://raw.githubusercontent.com/fniessen/emacs-leuven-theme/master/leuven-theme.el RET </kbd>
 
-Unfortunately, you won't be able to try Try with `M-x try RET try`.
+Unfortunately, you won't be able to try Try with <kbd> M-x try RET try </kbd>.
