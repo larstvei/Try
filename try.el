@@ -105,7 +105,7 @@
   (lambda (&rest x) (funcall f (apply g x))))
 
 ;;;###autoload
-(defun try ()
+(defun try (&optional url-or-package)
   "Try out a package from your `package-archives' or pass a URL
 to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
@@ -116,10 +116,14 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
        (< 1 (length package-archives))
        (package-refresh-contents))
   ;; Completions for packages.
-  (let* ((url-or-package (completing-read
-                          "url or package: "
-                          (mapcar (try-compose 'symbol-name 'car)
-                                  package-archive-contents)))
+  (let* ((url-or-package
+          (cond ((null url-or-package)
+                 (completing-read
+                  "url or package: "
+                  (mapcar (try-compose 'symbol-name 'car)
+                          package-archive-contents)))
+                ((symbolp url-or-package) (symbol-name url-or-package))
+                (t url-or-package)))
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
