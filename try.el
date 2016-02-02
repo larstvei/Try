@@ -101,6 +101,11 @@
   "Compose two functions."
   (lambda (&rest x) (funcall f (apply g x))))
 
+(defun try-and-refresh ()
+  "Refreshes package-list before calling `try'."
+  (interactive)
+  (package-refresh-contents) (try))
+
 ;;;###autoload
 (defun try ()
   "Try out a package from your `package-archives' or pass a URL
