@@ -100,6 +100,12 @@
   "Compose two functions."
   (lambda (&rest x) (funcall f (apply g x))))
 
+(defun try-complete (archive)
+  "Complete from available package names."
+  (let* ((f (try-compose #'symbol-name #'car))
+         (pkgs (mapcar f archive)))
+    (completing-read "url or package: " pkgs)))
+
 (defun try-and-refresh ()
   "Refreshes package-list before calling `try'."
   (interactive)
@@ -112,10 +118,7 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
   (interactive)
   ;; Completions for packages.
-  (let* ((url-or-package (completing-read
-                          "url or package: "
-                          (mapcar (try-compose 'symbol-name 'car)
-                                  package-archive-contents)))
+  (let* ((url-or-package (try-complete package-archive-contents))
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
