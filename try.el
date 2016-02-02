@@ -75,9 +75,6 @@
 (require 'package)
 (require 'url)
 
-(defvar try-archive-contents-initial-value package-archive-contents
-  "Remember the initial value of `package-archive-contents' to be
-  able to detect the need to call `package-refresh-contents'.")
 
 (defvar try-tmp-dir "/tmp/"
   "The default place packages to try out is /tmp/.")
@@ -110,11 +107,6 @@
 to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
   (interactive)
-  ;; Refresh package contents if needed.
-  (and (eq try-archive-contents-initial-value
-           package-archive-contents)
-       (< 1 (length package-archives))
-       (package-refresh-contents))
   ;; Completions for packages.
   (let* ((url-or-package (completing-read
                           "url or package: "
