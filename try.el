@@ -75,8 +75,7 @@
 (require 'package)
 (require 'url)
 
-
-(defvar try-tmp-dir "/tmp/"
+(defvar try-tmp-dir (make-temp-file "try" t)
   "The default place packages to try out is /tmp/.")
 
 (defun try-raw-link-p (url)
