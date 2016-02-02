@@ -112,13 +112,16 @@
   (package-refresh-contents) (try))
 
 ;;;###autoload
-(defun try ()
+(defun try (&optional url-or-package)
   "Try out a package from your `package-archives' or pass a URL
 to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
   (interactive)
   ;; Completions for packages.
-  (let* ((url-or-package (try-complete package-archive-contents))
+  (let* ((url-or-package (or (if (symbolp url-or-package)
+                                 (symbol-name url-or-package)
+                               url-or-package)
+                             (try-complete package-archive-contents)))
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
