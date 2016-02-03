@@ -106,6 +106,7 @@
          (pkgs (mapcar f archive)))
     (completing-read "url or package: " pkgs)))
 
+;;;###autoload
 (defun try-and-refresh ()
   "Refreshes package-list before calling `try'."
   (interactive)
