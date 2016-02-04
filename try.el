@@ -119,7 +119,7 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
 .el files are not stored at all."
   (interactive)
   ;; Completions for packages.
-  (let* ((url-or-package (or (if (symbolp url-or-package)
+  (let* ((url-or-package (or (if (and url-or-package (symbolp url-or-package))
                                  (symbol-name url-or-package)
                                url-or-package)
                              (try-complete package-archive-contents)))
