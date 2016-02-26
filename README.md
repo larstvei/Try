@@ -10,8 +10,7 @@ Packages from ELPA will be stored in a temporary directory by default.
 
 You can install Try using elpa.
 
-It's available on [marmalade](http://marmalade-repo.org/) and
-[melpa](http://melpa.milkbox.net/):
+It's available on [melpa](http://melpa.milkbox.net/):
 
 <kbd> M-x package-install try </kbd>
 
