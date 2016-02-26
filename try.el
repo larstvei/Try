@@ -37,7 +37,7 @@
 (require 'url)
 
 (defvar try-tmp-dir (make-temp-file "try" t)
-  "The default place packages to try out is /tmp/.")
+  "A temporary directory for storing packages.")
 
 (defun try-raw-link-p (url)
   "Returns non-nil if this looks like an URL to a .el file."

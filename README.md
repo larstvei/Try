@@ -4,7 +4,7 @@ Try is a package that allows you to try out Emacs packages without installing
 them. If you pass a URL to a plain text `.el`-file it evaluates the content,
 without storing the file.
 
-Packages from ELPA will temporarily be stored in `/tmp/` by default.
+Packages from ELPA will be stored in a temporary directory by default.
 
 ## Installation
 
