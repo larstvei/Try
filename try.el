@@ -87,7 +87,8 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
-           (let ((package-user-dir try-tmp-dir)
+           (let ((package-selected-packages nil) ; Don't store packages
+                 (package-user-dir try-tmp-dir)
                  (package-alist nil))
              (package-install package-symbol)
              (message "Trying %s!" url-or-package)))
