@@ -36,9 +36,6 @@
 (require 'package)
 (require 'url)
 
-(defvar try-tmp-dir (make-temp-file "try" t)
-  "A temporary directory for storing packages.")
-
 (defun try-raw-link-p (url)
   "Returns non-nil if this looks like an URL to a .el file."
   (string-match-p "[^:]*://\\([^?\r\n]+\\).*\.el?$" url))
@@ -87,11 +84,12 @@ to a raw .el file. Packages are stored in `try-tmp-dir' and raw
          (package-symbol (intern url-or-package)))
     (cond ((try-raw-link-p url-or-package) (try-raw-link url-or-package))
           ((try-package-exists-p package-symbol)
-           (let ((package-user-dir try-tmp-dir)
-                 (package-alist nil))
+           (let* ((tmp-dir (make-temp-file (concat url-or-package "-") t))
+                  (package-user-dir tmp-dir)
+                  (package-alist nil))
              (if (version< emacs-version "25.1")
                  (package-install package-symbol)
-                 (package-install package-symbol 'dont-select))
+               (package-install package-symbol 'dont-select))
              (message "Trying %s!" url-or-package)))
           (t (message (concat "Couldn't find a sensible way to try this. "
                               "Try running `package-refresh-contents'!"))))))
