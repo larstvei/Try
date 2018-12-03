@@ -65,10 +65,10 @@
     (completing-read "url or package: " pkgs)))
 
 ;;;###autoload
-(defun try-and-refresh ()
+(defun try-and-refresh (&optional url-or-package)
   "Refreshes package-list before calling `try'."
   (interactive)
-  (package-refresh-contents) (try))
+  (package-refresh-contents) (try url-or-package))
 
 ;;;###autoload
 (defun try (&optional url-or-package)
